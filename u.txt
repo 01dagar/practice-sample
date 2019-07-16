@@ -1,0 +1,100 @@
+//leetcode problem 2. add two numbers
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+         ListNode dummy = new ListNode(0);
+    ListNode p = l1, q = l2, curr = dummy;
+    int carry = 0;
+    while (p != null || q != null) {
+        int x = (p != null) ? p.val : 0;
+        int y = (q != null) ? q.val : 0;
+        int sum = carry + x + y;
+        carry = sum / 10;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
+        if (p != null) p = p.next;
+        if (q != null) q = q.next;
+    }
+    if (carry > 0) {
+        curr.next = new ListNode(carry);
+    }
+    return dummy.next;
+    }
+}
+
+
+
+
+
+
+//leetcode problem 7.reverse integer
+class Solution {
+    public int reverse(int x) {
+        int r=0;
+        while(x!=0){
+          int  j=x%10;
+            int t= r*10 + j;
+            if(t/10!=r){
+                return 0;
+            }
+            r=t;
+            x=x/10;
+        }
+        return r;
+    }
+    
+}
+
+
+
+
+
+//leetcode problem 9.palindrome number
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0 ){
+            return false;
+        }
+        int r=0;
+     int p=x;
+        while(x!=0){
+        r= r*10 + x%10;
+            x=x/10;
+    }
+      return r==p;  
+    }
+}
+
+
+
+
+//leetcode problem 13.roman to integer
+class Solution {
+    public int romanToInt(String s) {
+         Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+        int len = s.length();
+        int sum = map.get(s.charAt(len - 1));
+        for (int i = len - 2; i >= 0; --i) {
+            if (map.get(s.charAt(i)) < map.get(s.charAt(i + 1))) {
+                sum -= map.get(s.charAt(i));
+            } else {
+                sum += map.get(s.charAt(i));
+            }
+        }
+        return sum;
+    }
+    }
